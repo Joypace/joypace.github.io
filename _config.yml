@@ -106,4 +106,8 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: rsync
+  host: blog.joypace.com
+  user: root
+  root: /srv/nginx/data/blog
+  
