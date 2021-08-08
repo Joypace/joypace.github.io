@@ -15,6 +15,10 @@ author: Joypace.com
 language: zh-cn
 timezone: 'Asia/Shanghai'
 
+marked:
+    gym: true
+    breaks: false
+
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: http://blog.joypace.com
