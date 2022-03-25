@@ -110,3 +110,27 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
+
+# _config.yml
+math:
+  katex:
+    css: 'https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css'
+    options:
+      throwOnError: false
+  mathjax:
+    css: 'https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css'
+    options:
+      conversion:
+        display: false
+      tex:
+      svg:
+
+toc:
+  maxdepth: 5
+  class: toc
+  slugify: transliteration
+  decodeEntities: true
+  anchor:
+    position: after
+    symbol: '#'
+    style: header-anchor
