@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>机器人的世界观 | 目标导向系统</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="通用智能机器人的需要在现实世界中完成各种任务，因此他需要对他所处的现实世界进行建模。 我们为机器人设计的的数据结构和建模算法实际上隐含了机器人对这个世界的最核心的看法，即机器人的世界观。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器人的世界观">
+<meta property="og:url" content="http://blog.joypace.com/2022/03/23/WolrdviewOfTheAgent/index.html">
+<meta property="og:site_name" content="目标导向系统">
+<meta property="og:description" content="通用智能机器人的需要在现实世界中完成各种任务，因此他需要对他所处的现实世界进行建模。 我们为机器人设计的的数据结构和建模算法实际上隐含了机器人对这个世界的最核心的看法，即机器人的世界观。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-23T06:48:50.000Z">
+<meta property="article:modified_time" content="2022-03-25T14:56:36.409Z">
+<meta property="article:author" content="Joypace.com">
+<meta property="article:tag" content="世界观">
+<meta property="article:tag" content="主体架构">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="目标导向系统" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">目标导向系统</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">探索通用智能机器之路</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.joypace.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-WolrdviewOfTheAgent" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/23/WolrdviewOfTheAgent/" class="article-date">
+  <time class="dt-published" datetime="2022-03-23T06:48:50.000Z" itemprop="datePublished">2022-03-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      机器人的世界观
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>通用智能机器人的需要在现实世界中完成各种任务，因此他需要对他所处的现实世界进行建模。
+我们为机器人设计的的数据结构和建模算法实际上隐含了机器人对这个世界的最核心的看法，即机器人的世界观。</p>
+<span id="more"></span>
+
+
+<h3 id="上帝视角看世界——四维空间中的果冻布丁"><a href="#上帝视角看世界——四维空间中的果冻布丁" class="headerlink" title="上帝视角看世界——四维空间中的果冻布丁"></a>上帝视角看世界——四维空间中的果冻布丁</h3><p>我们可以把现实世界可以看做是一个三维的同构空间和一维时间组合而成的<strong>四维异构空间</strong>。
+在这个四维空间中的每一个点都存在N种状态。
+这里，空间点的一种状态是指这个点上某种属性的值。
+常见的属性有质量密度，电荷密度，引力场强度，粒子的各种状态函数值等等。
+如果知道整个四维空间任意点的状态的话，整个世界的所有物理定律，历史，现在和未来都知道了。
+因为它们全都隐含在这些状态中了。</p>
+<p>显然，我们无法真正获取这个四维空间当中每一个点的所有状态。
+我们甚至连N等于几都不能确定，更别说每一种状态的取值了。
+但是这并不妨碍我们定义:</p>
+<ul>
+<li>从现实世界的四维异构空间到四维向量空间<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>t</mi><mo separator="true">,</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo><mo>∈</mo><msup><mi>R</mi><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">(t, x, y,z) \in R^4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span>的双射关系</li>
+<li>从现实世界中的N种状态空间到M维向量空间<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>S</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>s</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>s</mi><mi>M</mi></msub><mo stretchy="false">)</mo><mo>∈</mo><msup><mi>C</mi><mi>M</mi></msup></mrow><annotation encoding="application/x-tex">\vec{S}=(s_1, s_2, ...,s_M) \in C^M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9663299999999999em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663299999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.15216em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span></span></span></span></span></span></span></span></span></span></span> 的双射关系，这里我们把现实世界中的状态中的向量全部为展开分量，如引力场展开为x,y,z三个方向的分量。</li>
+</ul>
+<p>现实空间的状态定义了一个从四维异构空间点到状态空间的映射关系。
+并且存在一个从四维向量空间到N维向量空间的函数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>t</mi><mo separator="true">,</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><mover accent="true"><mi>S</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">f(t,x,y,z)=\vec{S} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.9663299999999999em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663299999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.15216em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span></span></span></span> 与现实世界定义的映射关系同构。
+也就是说现实空间中的任何拓扑结构，都可以在向量空间同构的拓扑结构来表示。</p>
+<p>我们可以将整个世界可以映射到一个边长为1的超立方体内，用不同的半透明的颜色来表示不同类型的状态，用亮度来表示状态的强度。
+这样整个世界的状态“看”上去就像一块四维空间彩色果冻布丁。
+想象一下，所有的历史，未来以及物理规律都隐含在这块果冻布丁里，是不是有点神奇？
+从四维空间的视角观察，整个世界是静态的，时间只是其中的一个维度而已，是不是有点宿命论的感觉？</p>
+<p>如果我们把时间维度拿出来，每次只能观察到一个时刻的三位空间的话。
+沿着时间轴移动，观察到的这个半透明的彩色果冻布丁就变成了一个动态的模型了。</p>
+<p>这里，我们可以形成机器人最底层的世界观：</p>
+<ul>
+<li>世界是一个三维空间（位置）</li>
+<li>每个位置都可以存在N种状态（属性）</li>
+<li>世界中的状态会随着时间维度动态变化，并且时间始终沿着未来方向前进（时间）</li>
+</ul>
+<p>这些底层世界观最终将体现在机器人的软件，硬件及数据当中。
+也就是说机器人的内在机制能够描述，应用这些最底层的世界观。
+比如他必须有机制来描述两个事件发生的相对时间顺序，发生的相对空间位置等等。</p>
+<h3 id="现实中的挑战"><a href="#现实中的挑战" class="headerlink" title="现实中的挑战"></a>现实中的挑战</h3><p>理论上，如果我们能够使用某些方法在现实空间的中进行足够多的状态采样，就可以在向量空间的构建一个与现实世界同构的函数，从而完成对世界的建模。</p>
+<p>实际上有很多现实的挑战需要处理,比如说：</p>
+<ul>
+<li>空间挑战<ul>
+<li>精度和样本量的矛盾。空间上的点是一个无限小的概念，实际上无法测量无限小的位置的状态。并且精度越高，相同“体积”内需要采样的样本数就越高。</li>
+<li>不是任何位置都是可达的。物体内部，离主体很远的位置，过去，未来的状态对于当下来说都是不可达的</li>
+</ul>
+</li>
+<li>测量挑战：<ul>
+<li>很多属性是不能被主体直接测量的</li>
+<li>测量动作本身也会改变时空中的状态</li>
+</ul>
+</li>
+<li>认知挑战：主体开始都不知道某些属性的存在</li>
+<li>计算挑战：即使我们采到足够多，足够细粒度，足够高精度的历史样本，直接从最底层的点来计算为了达成目标需要执行的计划，计算上也是不可行的。</li>
+</ul>
+<p>为了应对这些挑战，主体必须利用其他机制对世界进行建模。</p>
+<h3 id="主体视角看世界——事物在物理定律的约束下相互作用"><a href="#主体视角看世界——事物在物理定律的约束下相互作用" class="headerlink" title="主体视角看世界——事物在物理定律的约束下相互作用"></a>主体视角看世界——事物在物理定律的约束下相互作用</h3><p>简单来说，我们可以从两个方面来迎接上面的挑战。
+首先，机器人是为了完成人类为其设定的目标的，因此，所有和实现机器人目标不相关的挑战可以简单的不予处理。
+比如很久以前的历史，遥远的未来，外星系的事件，基本粒子的属性等等。
+其次，也是最关键的是利用物理世界本身的特性。</p>
+<ol>
+<li><p>物理世界的状态分布符合其内在的一致性规律——物理定律，可以部分解决空间挑战，测量挑战和认知挑战</p>
+<p> 物理世界存在若干个基础定律，世界中的各种属性的状态必须满足这些这些定律的约束。
+ 物理定律的存在，导致世界的状态中存在大量重复的Pattern，
+ 机器人通过观察这些pattern，可能总结归纳出这些定律
+ 通过这些定律，能够基于一部分已知的状态推理出对应的未知状态
+ 通过观察pattern和构造规律假说，可以推理出与当前pattern相关，主体之前却不知道的属性。</p>
+</li>
+<li><p>整体，局部与结构——解决计算挑战</p>
+<p> 把细粒度的事物，概念在特定的结构下形成的整体作为认知和建模对象，可以使建模的效率大幅提升，推理的复杂度大幅降低。
+ 通常情况下，整体不是其局部简单的汇总，而是会形成整体特有的特性，即<strong>整体特性</strong>。
+ 并且这些整体特性同样会表现出明显的一致性。
+ 这一特点使得主体可以忽略组成物体的细节，直接在整体特性层面寻找和发现规律，从而大大简化主体认知，推理的计算需求。
+ 同时，模仿这些结构，主体还可能创造性的形成新的整体，比如发明自然界不存在的物品（创造性），构想出现实世界中不可能存在的事物（想象力）。
+ <strong>整体特性的使得主体从多个“合适”的粒度出发，“并发”地探索世界变得可能。</strong></p>
+<p> 将一定时空内的特定属性聚合在一起，当成整体来考虑可以大大简化主体推理的计算需求。
+ 我们把聚合在一起的属性整体叫做<strong>物体</strong>。
+ 注意这里我们对这个聚合没有任何特别的限制，任何属性都可以聚合在一起。
+ 从这个方面来看，物体是一个主观概念，它只是一些基础属性的<em>载体</em>。
+ 一旦你用某种机制“定义”了这个载体的范畴，它对应的属性集合是绝对的客观事实，
+ 从另外一个方面来看，因为主体定义物体的目的是简化计算和推理，因此实际定义物体时，总是会遵循一些基本原则使得的定义的物体更有用。
+ 我们也可以聚合特定的物体从而定义更复杂的新的物体。
+ 虽然物体整体特性是局部特性在特定结构下相互作用的结果，但它往往是任何局部都无法单独体现的特性。
+ 很多时候，物体的整体特性在事物之间的相互作用过程中表现出明显的一致性规律。
+ （注意，整体特性并不是主体主观定义的，而是物体的内部各个部分相互作用的客观结果。）
+ 物体的定义使得世界“变得”丰富多彩，而不再“看上去”只是若干种基础属性在四维空间中的分布。</p>
+<p> 将特定时空集合总的相关物体、属性及其动态变化的过程聚合起来当成整体考虑，就形成<strong>事件</strong>。通过关注事件相关的事物，可以使得主体将计算资源集中在一个相对可控的范围，从而更可能完成其特定的目标，比如发现规律，搜索目标对象，推理事件发展等等。类似于物体的情况，事件本身也可以通过组合形成更复杂的事件。整体事件也会具有其子事件不具有的整体特性。</p>
+</li>
+</ol>
+<p>现在，机器人的世界观扩展为：</p>
+<ul>
+<li>世界上存在<strong>事物</strong>——物体和事件</li>
+<li>世界所有<strong>事物</strong>在物理定律的约束下相互作用</li>
+<li>可以使用任何合适粒度的来对世界进行建模</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.joypace.com/2022/03/23/WolrdviewOfTheAgent/" data-id="cl16jrl73001eccn99m1qchsu" data-title="机器人的世界观" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%BB%E4%BD%93%E6%9E%B6%E6%9E%84/" rel="tag">主体架构</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/17/CausalEffectAndConsistency/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">因果关系与一致性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" rel="tag">一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E4%BD%93%E6%9E%B6%E6%9E%84/" rel="tag">主体架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF/" rel="tag">信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%81%87%E8%AE%BE/" rel="tag">假设</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A0%E6%9E%9C%E5%85%B3%E7%B3%BB/" rel="tag">因果关系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%8C%E7%BE%8E/" rel="tag">完美</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E8%AF%86/" rel="tag">常识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%9D%E8%80%83/" rel="tag">思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A6%82%E8%BF%B0/" rel="tag">概述</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E5%AF%BC%E5%90%91/" rel="tag">目标导向</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9C%8B%E8%A7%81/" rel="tag">看见</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E8%A7%89/" rel="tag">视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B6%B3%E5%A4%9F/" rel="tag">足够</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7/" style="font-size: 10px;">一致性</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 10px;">世界观</a> <a href="/tags/%E4%B8%BB%E4%BD%93%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">主体架构</a> <a href="/tags/%E4%BF%A1%E6%81%AF/" style="font-size: 15px;">信息</a> <a href="/tags/%E5%81%87%E8%AE%BE/" style="font-size: 10px;">假设</a> <a href="/tags/%E5%9B%A0%E6%9E%9C%E5%85%B3%E7%B3%BB/" style="font-size: 10px;">因果关系</a> <a href="/tags/%E5%AE%8C%E7%BE%8E/" style="font-size: 10px;">完美</a> <a href="/tags/%E5%B8%B8%E8%AF%86/" style="font-size: 10px;">常识</a> <a href="/tags/%E6%80%9D%E8%80%83/" style="font-size: 10px;">思考</a> <a href="/tags/%E6%A6%82%E8%BF%B0/" style="font-size: 20px;">概述</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E5%AF%BC%E5%90%91/" style="font-size: 15px;">目标导向</a> <a href="/tags/%E7%9C%8B%E8%A7%81/" style="font-size: 10px;">看见</a> <a href="/tags/%E8%A7%86%E8%A7%89/" style="font-size: 10px;">视觉</a> <a href="/tags/%E8%B6%B3%E5%A4%9F/" style="font-size: 10px;">足够</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/23/WolrdviewOfTheAgent/">机器人的世界观</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/17/CausalEffectAndConsistency/">因果关系与一致性</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/12/WhyIsItHardToMakeAMachineSee/">为什么让机器看见事物很难</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/21/CanWeDescribeEverything/">我们能够描述所有事物吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/19/CommonSenseIsVital/">常识很重要</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Joypace.com<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
